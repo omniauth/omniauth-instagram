@@ -9,6 +9,11 @@ module OmniAuth
         :token_url => 'https://api.instagram.com/oauth/access_token'
       }
 
+      def callback_url
+        query_string = request.params.except('code').to_query
+        super + (query_string.empty? ? "" : "?#{query_string}")
+      end
+
       def request_phase
         options[:scope] ||= 'basic'
         options[:response_type] ||= 'code'
