@@ -10,7 +10,7 @@ module OmniAuth
       }
 
       def callback_url
-        query_string = request.params.except('code').to_query
+        query_string = request.params.except('code', 'state').to_query
         super + (query_string.empty? ? "" : "?#{query_string}")
       end
 
