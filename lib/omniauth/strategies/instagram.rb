@@ -21,6 +21,7 @@ module OmniAuth
         {
           'nickname' => raw_info['username'],
           'name'     => raw_info['full_name'],
+          'email'    => raw_info['email'],
           'image'    => raw_info['profile_picture'],
           'bio'      => raw_info['bio'],
           'website'  => raw_info['website'],
