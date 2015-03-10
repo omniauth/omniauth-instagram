@@ -12,8 +12,7 @@ module OmniAuth
       configure do |c|
         c.full_host = 'http://foo.kitcrm.com'
         OmniAuth.logger.send(:info, "setting full host")
-        OmniAuth.logger.send(:info, options.inspect)
-        OmniAuth.logger.send(:info, default_options.inspect)
+        
       end
 
       def request_phase
