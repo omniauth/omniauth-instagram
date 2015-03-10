@@ -9,11 +9,7 @@ module OmniAuth
         :token_url => 'https://api.instagram.com/oauth/access_token'
       }
 
-      configure do |c|
-        c.full_host = 'http://foo.kitcrm.com'
-        OmniAuth.logger.send(:info, "setting full host")
-        
-      end
+      option :callback_url
 
       def request_phase
         options[:scope] ||= 'basic'
@@ -32,6 +28,10 @@ module OmniAuth
           'bio'      => raw_info['bio'],
           'website'  => raw_info['website'],
         }
+      end
+      
+      def callback_url
+        options[:callback_url] || super
       end
 
       def raw_info
