@@ -31,7 +31,7 @@ module OmniAuth
       end
       
       def callback_url
-        options[:callback_url] || super
+        options.callback_url || super
       end
 
       def raw_info
