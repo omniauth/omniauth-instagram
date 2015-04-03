@@ -37,6 +37,21 @@ module OmniAuth
         end
         @data
       end
+
+      # You can pass +scope+ params to the auth request, if you need to set them dynamically.
+      # You can also set these options in the OmniAuth config :authorize_params option.
+      #
+      # For example: /auth/instagram?scope=likes
+      def authorize_params
+        super.tap do |params|
+          %w[scope].each do |v|
+            if request.params[v]
+              params[v.to_sym] = request.params[v]
+            end
+          end
+        end
+      end
+      
     end
   end
 end
