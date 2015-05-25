@@ -28,8 +28,14 @@ module OmniAuth
         }
       end
 
+      extra do
+        hash = {}
+        hash['raw_info'] = raw_info
+        hash
+      end
+
       def raw_info
-        @data ||= access_token.params["user"]
+        # @data ||= access_token.params["user"]
         unless @data
           access_token.options[:mode] = :query
           access_token.options[:param_name] = "access_token"
@@ -44,7 +50,7 @@ module OmniAuth
       # For example: /auth/instagram?scope=likes+photos
       def authorize_params
         super.tap do |params|
-          %w[scope].each do |v| 
+          %w[scope].each do |v|
             params[v.to_sym] = request.params[v] if request.params[v]
             if params[v.to_sym]
               params[v.to_sym] = Array(params[v.to_sym]).join(' ')
@@ -52,7 +58,7 @@ module OmniAuth
           end
         end
       end
-      
+
     end
   end
 end
