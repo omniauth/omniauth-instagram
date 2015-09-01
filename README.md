@@ -10,6 +10,8 @@ on the [Instagram Developer website](http://instagram.com/developer/).
       provider :instagram, ENV['INSTAGRAM_ID'], ENV['INSTAGRAM_SECRET']
     end
 
+P.S: Instagram has started enforcing signed requests for its API. If you have enabled `Enforce signed requests` in your app then, you can pass `enforce_signed_requests: true` in the above configuration. More info: https://instagram.com/developer/secure-api-requests/
+
 ## License
 
 Copyright (c) 2011 Mihai Anca and Intridea, Inc.
