@@ -9,6 +9,10 @@ module OmniAuth
         :token_url => 'https://api.instagram.com/oauth/access_token'
       }
 
+      def callback_url
+        full_host + script_name + callback_path
+      end
+
       def request_phase
         options[:scope] ||= 'basic'
         options[:response_type] ||= 'code'
