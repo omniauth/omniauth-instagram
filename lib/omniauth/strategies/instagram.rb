@@ -31,9 +31,15 @@ module OmniAuth
           'website'  => raw_info['website'],
         }
       end
+      
+      extra do
+        hash = {}
+        hash['raw_info'] = raw_info
+        hash
+      end
 
       def raw_info
-        @data ||= access_token.params["user"]
+        # @data ||= access_token.params["user"]
         unless @data
           access_token.options[:mode] = :query
           access_token.options[:param_name] = "access_token"
