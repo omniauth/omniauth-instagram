@@ -16,6 +16,8 @@ module OmniAuth
       def request_phase
         options[:scope] ||= 'basic'
         options[:response_type] ||= 'code'
+        options[:enforce_signed_requests] ||= false
+        options[:extra_data] ||= false
         super
       end
 
@@ -32,12 +34,22 @@ module OmniAuth
         }
       end
 
+      extra do
+        hash = {}
+        hash['raw_info'] = raw_info
+        hash
+      end
+
       def raw_info
-        @data ||= access_token.params["user"]
-        unless @data
+        if options[:extra_data]
+          endpoint = "/users/self"
+          params = {}
           access_token.options[:mode] = :query
           access_token.options[:param_name] = "access_token"
-          @data ||= access_token.get('/v1/users/self').parsed['data'] || {}
+          params["sig"] = generate_sig(endpoint, {"access_token" => access_token.token}) if options[:enforce_signed_requests]
+          @data ||= access_token.get("/v1#{endpoint}", { params: params }).parsed['data'] || {}
+        else
+          @data ||= access_token.params["user"]
         end
         @data
       end
@@ -48,7 +60,7 @@ module OmniAuth
       # For example: /auth/instagram?scope=likes+photos
       def authorize_params
         super.tap do |params|
-          %w[scope].each do |v| 
+          %w[scope].each do |v|
             params[v.to_sym] = request.params[v] if request.params[v]
             if params[v.to_sym]
               params[v.to_sym] = Array(params[v.to_sym]).join(' ')
@@ -56,7 +68,18 @@ module OmniAuth
           end
         end
       end
-      
+
+      def generate_sig(endpoint, params)
+        require 'openssl'
+        require 'base64'
+        sig = endpoint
+        secret = options[:client_secret]
+        params.sort.map do |key, val|
+          sig += '|%s=%s' % [key, val]
+        end
+        digest = OpenSSL::Digest.new('sha256')
+        return OpenSSL::HMAC.hexdigest(digest, secret, sig)
+      end
     end
   end
 end
