@@ -4,9 +4,9 @@ module OmniAuth
   module Strategies
     class Instagram < OmniAuth::Strategies::OAuth2
       option :client_options, {
-        :site => 'https://api.instagram.com',
-        :authorize_url => 'https://api.instagram.com/oauth/authorize',
-        :token_url => 'https://api.instagram.com/oauth/access_token'
+        :site => 'https://www.instagram.com',
+        :authorize_url => 'https://www.instagram.com/oauth/authorize',
+        :token_url => 'https://www.instagram.com/oauth/access_token'
       }
 
       def callback_url
