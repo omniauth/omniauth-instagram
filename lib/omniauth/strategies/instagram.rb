@@ -3,11 +3,9 @@ require 'omniauth-oauth2'
 module OmniAuth
   module Strategies
     class Instagram < OmniAuth::Strategies::OAuth2
-      option :client_options, {
-        :site => 'https://api.instagram.com',
-        :authorize_url => 'https://api.instagram.com/oauth/authorize',
-        :token_url => 'https://api.instagram.com/oauth/access_token'
-      }
+      option :client_options,         site: 'https://api.instagram.com',
+                                      authorize_url: 'https://api.instagram.com/oauth/authorize',
+                                      token_url: 'https://api.instagram.com/oauth/access_token'
 
       def callback_url
         full_host + script_name + callback_path
@@ -30,7 +28,7 @@ module OmniAuth
           'email'    => raw_info['email'],
           'image'    => raw_info['profile_picture'],
           'bio'      => raw_info['bio'],
-          'website'  => raw_info['website'],
+          'website'  => raw_info['website']
         }
       end
 
@@ -42,14 +40,14 @@ module OmniAuth
 
       def raw_info
         if options[:extra_data]
-          endpoint = "/users/self"
+          endpoint = '/users/self'
           params = {}
           access_token.options[:mode] = :query
-          access_token.options[:param_name] = "access_token"
-          params["sig"] = generate_sig(endpoint, {"access_token" => access_token.token}) if options[:enforce_signed_requests]
-          @data ||= access_token.get("/v1#{endpoint}", { params: params }).parsed['data'] || {}
+          access_token.options[:param_name] = 'access_token'
+          params['sig'] = generate_sig(endpoint, 'access_token' => access_token.token) if options[:enforce_signed_requests]
+          @data ||= access_token.get("/v1#{endpoint}", params: params).parsed['data'] || {}
         else
-          @data ||= access_token.params["user"]
+          @data ||= access_token.params['user']
         end
         @data
       end
@@ -78,7 +76,7 @@ module OmniAuth
           sig += '|%s=%s' % [key, val]
         end
         digest = OpenSSL::Digest.new('sha256')
-        return OpenSSL::HMAC.hexdigest(digest, secret, sig)
+        OpenSSL::HMAC.hexdigest(digest, secret, sig)
       end
     end
   end

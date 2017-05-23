@@ -7,3 +7,13 @@ Style/FileName:
 AllCops:
   Exclude:
     - 'tmp/**/*'
+
+Metrics/MethodLength:
+  CountComments: false
+  Max: 12
+
+Metrics/AbcSize:
+  Max: 20.35
+
+Style/FormatString:
+  Enabled: false
