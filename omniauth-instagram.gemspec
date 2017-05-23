@@ -18,8 +18,7 @@ Gem::Specification.new do |gem|
 
   gem.add_dependency 'omniauth', '~> 1'
   gem.add_dependency 'omniauth-oauth2', '~> 1'
-  gem.add_development_dependency 'rspec', '~> 2.12'
-  gem.add_development_dependency 'rack-test'
-  gem.add_development_dependency 'simplecov'
-  gem.add_development_dependency 'webmock'
+
+  # s.add_development_dependency 'dotenv', '>= 2.0'
+  # s.add_development_dependency 'sinatra', '>= 2.0'
 end
