@@ -1,0 +1,19 @@
+inherit_from:
+  - https://raw.githubusercontent.com/tmilewski/rubocop-defaults/master/rubocop.yml
+
+Style/FileName:
+  Enabled: false
+
+AllCops:
+  Exclude:
+    - 'tmp/**/*'
+
+Metrics/MethodLength:
+  CountComments: false
+  Max: 12
+
+Metrics/AbcSize:
+  Max: 20.35
+
+Style/FormatString:
+  Enabled: false
