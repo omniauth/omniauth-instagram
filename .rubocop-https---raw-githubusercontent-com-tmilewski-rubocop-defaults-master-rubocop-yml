@@ -1,0 +1,58 @@
+# see https://github.com/bbatsov/rubocop/blob/master/config/default.yml
+# for default configuration
+
+AllCops:
+  TargetRubyVersion: 2.4
+  DisplayCopNames: true
+  Exclude:
+    - 'db/schema.rb'
+    - 'bin/*'
+    - 'vendor/**/*'
+
+Rails:
+  Enabled: true
+
+Documentation:
+  Enabled: false
+
+Metrics/LineLength:
+  Max: 125
+  Exclude:
+    - 'db/migrate/*'
+    - 'config/initializers/devise.rb'
+
+Metrics/MethodLength:
+  CountComments: false
+  Max: 10
+  Exclude:
+    - 'db/migrate/*'
+
+Metrics/ModuleLength:
+  CountComments: false
+  Max: 100
+
+Metrics/AbcSize:
+  # The ABC size is a calculated magnitude, so this number can be a Fixnum or a Float.
+  # http://c2.com/cgi/wiki?AbcMetric
+  Max: 15
+
+Metrics/CyclomaticComplexity:
+  # http://www.rubydoc.info/github/bbatsov/rubocop/Rubocop/Cop/Style/CyclomaticComplexity
+  Max: 6
+
+Metrics/PerceivedComplexity:
+  # http://www.rubydoc.info/gems/rubocop/RuboCop/Cop/Metrics/PerceivedComplexity
+  Max: 7
+
+Metrics/ClassLength:
+  CountComments: false
+  Max: 100
+
+Style/MultilineMethodCallIndentation:
+  EnforcedStyle: indented
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Style/ClassAndModuleChildren:
+  Enabled: false
