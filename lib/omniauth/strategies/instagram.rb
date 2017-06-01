@@ -11,6 +11,8 @@ module OmniAuth
         full_host + script_name + callback_path
       end
 
+      option :callback_url
+
       def request_phase
         options[:scope] ||= 'basic'
         options[:response_type] ||= 'code'
@@ -30,6 +32,10 @@ module OmniAuth
           'bio'      => raw_info['bio'],
           'website'  => raw_info['website']
         }
+      end
+      
+      def callback_url
+        options.callback_url || super
       end
 
       extra do
