@@ -27,7 +27,8 @@ module OmniAuth
           'name'     => raw_info['full_name'],
           'image'    => raw_info['profile_picture'],
           'bio'      => raw_info['bio'],
-          'website'  => raw_info['website']
+          'website'  => raw_info['website'],
+          'is_business' => raw_info['is_business']
         }
       end
 
