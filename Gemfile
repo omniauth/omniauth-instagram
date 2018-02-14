@@ -9,7 +9,8 @@ end
 group :test do
   # gem 'coveralls', require: false
   gem 'rack-test'
-  gem 'rspec', '~> 3.6.0' # '~> 3.6.0'
+  gem 'rspec', '~> 3.6.0'
+  gem 'webmock', '~> 3.2.1'
   gem 'simplecov', require: false
 end
 
