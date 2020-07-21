@@ -19,18 +19,7 @@ module OmniAuth
         super
       end
 
-      uid { raw_info['id'] }
-
-      info do
-        {
-          'nickname' => raw_info['username'],
-          'name'     => raw_info['full_name'],
-          'image'    => raw_info['profile_picture'],
-          'bio'      => raw_info['bio'],
-          'website'  => raw_info['website'],
-          'is_business' => raw_info['is_business']
-        }
-      end
+      uid { raw_info['user_id'] }
 
       extra do
         hash = {}
@@ -47,7 +36,7 @@ module OmniAuth
           params['sig'] = generate_sig(endpoint, 'access_token' => access_token.token) if options[:enforce_signed_requests]
           @data ||= access_token.get("/v1#{endpoint}", params: params).parsed['data'] || {}
         else
-          @data ||= access_token.params['user']
+          @data ||= access_token.params
         end
         @data
       end
