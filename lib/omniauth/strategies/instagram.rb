@@ -12,7 +12,7 @@ module OmniAuth
       end
 
       def request_phase
-        options[:scope] ||= 'basic'
+        options[:scope] ||= 'instagram_basic'
         options[:response_type] ||= 'code'
         options[:enforce_signed_requests] ||= false
         options[:extra_data] ||= false
