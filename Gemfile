@@ -7,7 +7,7 @@ group :development do
 end
 
 group :test do
-  # gem 'coveralls', require: false
+  gem 'webmock', '~> 3.13'
   gem 'rack-test'
   gem 'rspec', '~> 3.6.0' # '~> 3.6.0'
   gem 'simplecov', require: false
